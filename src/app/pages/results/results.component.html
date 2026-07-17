@@ -1,0 +1,71 @@
+<app-hr-sidebar></app-hr-sidebar>
+
+<div class="result-container">
+
+    <h1>Interview Results</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Candidate</th>
+                <th>Applied Job</th>
+                <th>Match Score</th>
+                <th>Technical</th>
+                <th>Communication</th>
+                <th>Overall</th>
+                <th>Final Status</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let result of results; let i=index">
+
+                <td>{{result.name}}</td>
+
+                <td>{{result.job}}</td>
+
+                <td>{{result.matchScore}}%</td>
+
+                <td>{{result.technical}}</td>
+
+                <td>{{result.communication}}</td>
+
+                <td>{{result.overall}}</td>
+
+                <td>
+
+                    <span
+                    [ngClass]="result.status=='Selected' ? 'selected' : 'rejected'">
+
+                        {{result.status}}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="view-btn"
+                        [routerLink]="['/candidate-result']">
+
+                        View Details
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

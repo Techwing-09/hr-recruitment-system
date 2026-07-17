@@ -1,0 +1,87 @@
+<app-hr-sidebar></app-hr-sidebar>
+
+<div class="result-container">
+
+    <div class="result-card">
+
+        <h2>Candidate Result</h2>
+
+        <hr>
+
+        <div class="row">
+            <label>Candidate Name</label>
+            <span>{{candidate.name}}</span>
+        </div>
+
+        <div class="row">
+            <label>Email</label>
+            <span>{{candidate.email}}</span>
+        </div>
+
+        <div class="row">
+            <label>Phone Number</label>
+            <span>{{candidate.phone}}</span>
+        </div>
+
+        <div class="row">
+            <label>Applied Job</label>
+            <span>{{candidate.job}}</span>
+        </div>
+
+        <div class="row">
+            <label>Resume</label>
+            <button class="resume-btn">View Resume</button>
+        </div>
+
+        <div class="row">
+            <label>Match Score</label>
+            <span>{{candidate.matchScore}}%</span>
+        </div>
+
+        <div class="row">
+            <label>Technical Score</label>
+            <span>{{candidate.technical}}</span>
+        </div>
+
+        <div class="row">
+            <label>Communication Score</label>
+            <span>{{candidate.communication}}</span>
+        </div>
+
+        <div class="row">
+            <label>Overall Score</label>
+            <span>{{candidate.overall}}</span>
+        </div>
+
+        <div class="row">
+            <label>AI Feedback</label>
+            <span>{{candidate.feedback}}</span>
+        </div>
+
+        <div class="row">
+            <label>Status</label>
+
+            <span
+            [ngClass]="candidate.status=='Selected' ? 'selected' : 'rejected'">
+
+                {{candidate.status}}
+
+            </span>
+
+        </div>
+
+        <div class="buttons">
+
+            <button class="offer-btn">
+                Send Offer Letter
+            </button>
+
+            <button class="reject-btn">
+                Reject Candidate
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

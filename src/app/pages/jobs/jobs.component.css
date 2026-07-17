@@ -1,0 +1,131 @@
+.job-container{
+
+    margin-left:260px;
+
+    padding:30px;
+
+    background:#f5f7fa;
+
+    min-height:100vh;
+
+}
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.header h1{
+
+    color:#0d47a1;
+
+}
+
+.add-btn{
+
+    background:#0d47a1;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+}
+
+.add-btn:hover{
+
+    background:#1565c0;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+
+}
+
+th{
+
+    background:#0d47a1;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+td{
+
+    border:1px solid #ddd;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+.edit-btn{
+
+    background:orange;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:5px;
+
+    margin-right:5px;
+
+    cursor:pointer;
+
+}
+
+.delete-btn{
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+}
+
+.edit-btn:hover{
+
+    background:darkorange;
+
+}
+
+.delete-btn:hover{
+
+    background:darkred;
+
+}

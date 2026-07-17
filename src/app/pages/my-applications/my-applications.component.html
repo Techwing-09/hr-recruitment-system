@@ -1,0 +1,55 @@
+<app-candidate-sidebar></app-candidate-sidebar>
+
+<div class="applications-container">
+
+    <h1>My Applications</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Job Title</th>
+                <th>Applied Date</th>
+                <th>Match Score</th>
+                <th>Interview Status</th>
+                <th>Final Status</th>
+                
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let application of applications">
+
+                <td>{{application.jobTitle}}</td>
+
+                <td>{{application.date}}</td>
+
+                <td>{{application.matchScore}}%</td>
+
+                <td>{{application.interviewStatus}}</td>
+
+                <td>
+
+                    <span
+                    [ngClass]="application.finalStatus=='Selected' ? 'selected':'pending'">
+
+                        {{application.finalStatus}}
+
+                    </span>
+
+                </td>
+
+                
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

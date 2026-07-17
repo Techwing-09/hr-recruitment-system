@@ -1,0 +1,78 @@
+<app-hr-sidebar></app-hr-sidebar>
+<div class="job-container">
+
+    <div class="header">
+
+        <h1>Job Management</h1>
+
+        <button
+        class="add-btn"
+        routerLink="/add-job">
+
+            + Post New Job
+
+        </button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Job Title</th>
+                <th>Skills</th>
+                <th>Experience</th>
+                <th>Salary</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let job of jobs; let i=index">
+
+                <td>{{job.title}}</td>
+
+                <td>{{job.skills}}</td>
+
+                <td>{{job.experience}}</td>
+
+                <td>{{job.salary}}</td>
+
+                <td>{{job.location}}</td>
+
+                <td>{{job.description}}</td>
+
+                <td>
+
+                    <button
+                    class="edit-btn"
+                    (click)="editJob(i)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                    class="delete-btn"
+                    (click)="deleteJob(i)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

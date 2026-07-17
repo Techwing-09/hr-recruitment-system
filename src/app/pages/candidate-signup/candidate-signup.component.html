@@ -1,0 +1,68 @@
+<div class="signup-container">
+
+    <div class="signup-card">
+
+        <h2>Candidate Registration</h2>
+
+        <p>Create your TalentMatch account</p>
+
+        <form>
+
+            <label>Full Name</label>
+            <input
+                type="text"
+                [(ngModel)]="candidate.name"
+                name="name"
+                placeholder="Enter Full Name">
+
+            <label>Email</label>
+            <input
+                type="email"
+                [(ngModel)]="candidate.email"
+                name="email"
+                placeholder="Enter Email">
+
+            <label>Phone Number</label>
+            <input
+                type="text"
+                [(ngModel)]="candidate.phone"
+                name="phone"
+                placeholder="Enter Phone Number">
+
+            <label>Password</label>
+            <input
+                type="password"
+                [(ngModel)]="candidate.password"
+                name="password"
+                placeholder="Create Password">
+
+            <label>Confirm Password</label>
+            <input
+                type="password"
+                [(ngModel)]="candidate.confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password">
+
+            <button
+                type="button"
+                (click)="register()">
+
+                Register
+
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a routerLink="/candidate-login">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

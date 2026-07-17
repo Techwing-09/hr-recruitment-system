@@ -1,0 +1,81 @@
+<app-hr-sidebar></app-hr-sidebar>
+
+<div class="add-job-container">
+
+    <div class="job-card">
+
+        <h2>Post a New Job</h2>
+
+        <form>
+
+            <label>Job Title</label>
+            <input
+                type="text"
+                [(ngModel)]="job.title"
+                name="title"
+                placeholder="Enter Job Title">
+
+            <label>Required Skills</label>
+            <input
+                type="text"
+                [(ngModel)]="job.skills"
+                name="skills"
+                placeholder="Java, Spring Boot, MySQL">
+
+            <label>Experience</label>
+            <input
+                type="text"
+                [(ngModel)]="job.experience"
+                name="experience"
+                placeholder="2 Years">
+
+            <label>Salary (LPA)</label>
+            <input
+                type="text"
+                [(ngModel)]="job.salary"
+                name="salary"
+                placeholder="8 LPA">
+
+            <label>Location</label>
+            <input
+                type="text"
+                [(ngModel)]="job.location"
+                name="location"
+                placeholder="Hyderabad">
+
+            <label>Job Description</label>
+
+            <textarea
+                rows="5"
+                [(ngModel)]="job.description"
+                name="description"
+                placeholder="Enter Job Description">
+            </textarea>
+
+            <div class="button-group">
+
+                <button
+                    type="button"
+                    class="save-btn"
+                    (click)="saveJob()">
+
+                    Save Job
+
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    routerLink="/jobs">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

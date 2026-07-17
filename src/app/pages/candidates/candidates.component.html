@@ -1,0 +1,48 @@
+<app-hr-sidebar></app-hr-sidebar>
+
+<div class="candidate-container">
+
+    <h1>Candidates</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Candidate Name</th>
+                <th>Email</th>
+                <th>Applied Job</th>
+                <th>Resume</th>
+                <th>Match Score</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let candidate of candidates">
+
+                <td>{{candidate.name}}</td>
+                <td>{{candidate.email}}</td>
+                <td>{{candidate.job}}</td>
+
+                <td>
+                    <button class="resume-btn">
+                        View Resume
+                    </button>
+                </td>
+
+                <td>{{candidate.matchScore}}%</td>
+
+                <td>{{candidate.status}}</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
