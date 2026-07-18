@@ -1,0 +1,51 @@
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h2>Candidate Login</h2>
+
+        <p>Login to apply for jobs and track your applications.</p>
+
+        <form>
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                placeholder="Enter Email"
+                [(ngModel)]="candidate.email"
+                name="email">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+                [(ngModel)]="candidate.password"
+                name="password">
+
+            <button
+                type="button"
+                (click)="login()">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="links">
+
+            <a routerLink="/candidate-signup">
+                Create New Account
+            </a>
+
+            <a href="#">
+                Forgot Password?
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
