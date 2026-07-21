@@ -7,60 +7,60 @@
     <table>
 
         <thead>
-
             <tr>
-
                 <th>Candidate</th>
                 <th>Applied Job</th>
                 <th>Match Score</th>
                 <th>Technical</th>
                 <th>Communication</th>
                 <th>Overall</th>
+                <th>AI Feedback</th>
+                <th>Interview Status</th>
                 <th>Final Status</th>
                 <th>Action</th>
-
             </tr>
-
         </thead>
 
         <tbody>
 
-            <tr *ngFor="let result of results; let i=index">
+            <tr *ngFor="let result of results">
 
-                <td>{{result.name}}</td>
+                <td>{{ result.candidateName }}</td>
 
-                <td>{{result.job}}</td>
+                <td>{{ result.jobTitle }}</td>
 
-                <td>{{result.matchScore}}%</td>
+                <td>{{ result.matchScore }}%</td>
 
-                <td>{{result.technical}}</td>
+                <td>{{ result.technicalScore }}</td>
 
-                <td>{{result.communication}}</td>
+                <td>{{ result.communicationScore }}</td>
 
-                <td>{{result.overall}}</td>
+                <td>{{ result.overallScore }}</td>
+
+                <td>{{ result.aiFeedback }}</td>
+
+                <td>{{ result.interviewStatus }}</td>
 
                 <td>
-
                     <span
-                    [ngClass]="result.status=='Selected' ? 'selected' : 'rejected'">
+                        [ngClass]="result.finalStatus == 'Offer Sent' ? 'selected' : 'rejected'">
 
-                        {{result.status}}
+                        {{ result.finalStatus }}
 
                     </span>
-
                 </td>
 
-                <td>
+               <td>
 
-                    <button
-                        class="view-btn"
-                        [routerLink]="['/candidate-result']">
+    <button
+        class="view-btn"
+        [routerLink]="['/candidate-result', result.applicationId]">
 
-                        View Details
+        View Details
 
-                    </button>
+    </button>
 
-                </td>
+</td>
 
             </tr>
 

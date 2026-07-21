@@ -1,19 +1,27 @@
 export class Application {
 
-    id?: number;
+  applicationId?: number;
 
-    candidateId!: number;
+  candidateId!: number;
 
-    jobId!: number;
+  jobId!: number;
 
-    appliedDate!: string;
+  candidateName?: string;
 
-    resume!: string;
+  email?: string;
 
-    matchScore!: number;
+  jobTitle?: string;
 
-    interviewStatus!: string;
+  appliedDate?: string;
 
-    finalStatus!: string;
+  matchScore?: number;
+  technicalScore?: number;
+  communicationScore?: number;
+  overallScore?: number;
+  aiFeedback?: string;
+
+  interviewStatus?: string;
+
+  finalStatus?: string;
 
 }

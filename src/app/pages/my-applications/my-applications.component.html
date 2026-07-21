@@ -15,7 +15,6 @@
                 <th>Match Score</th>
                 <th>Interview Status</th>
                 <th>Final Status</th>
-                
 
             </tr>
 
@@ -25,26 +24,34 @@
 
             <tr *ngFor="let application of applications">
 
-                <td>{{application.jobTitle}}</td>
+                <td>{{ application.jobTitle }}</td>
 
-                <td>{{application.date}}</td>
+                <td>{{ application.appliedDate }}</td>
 
-                <td>{{application.matchScore}}%</td>
+                <td>{{ application.matchScore }}%</td>
 
-                <td>{{application.interviewStatus}}</td>
+                <td>{{ application.interviewStatus }}</td>
 
                 <td>
 
                     <span
-                    [ngClass]="application.finalStatus=='Selected' ? 'selected':'pending'">
+                        [ngClass]="application.finalStatus === 'Selected' ? 'selected' : 'pending'">
 
-                        {{application.finalStatus}}
+                        {{ application.finalStatus }}
 
                     </span>
 
                 </td>
 
-                
+            </tr>
+
+            <tr *ngIf="applications.length === 0">
+
+                <td colspan="5" style="text-align:center;">
+
+                    No applications found.
+
+                </td>
 
             </tr>
 

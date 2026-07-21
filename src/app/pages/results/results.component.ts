@@ -1,44 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Application } from 'src/app/models/application';
+import { ApplicationService } from 'src/app/services/application.service';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent {
+export class ResultsComponent implements OnInit {
 
-  results = [
+  results: Application[] = [];
 
-    {
-      name:'Rahul',
-      job:'Java Developer',
-      matchScore:92,
-      technical:90,
-      communication:88,
-      overall:89,
-      status:'Selected'
-    },
+  constructor(private applicationService: ApplicationService) { }
 
-    {
-      name:'Priya',
-      job:'Angular Developer',
-      matchScore:85,
-      technical:80,
-      communication:82,
-      overall:81,
-      status:'Selected'
-    },
+  ngOnInit(): void {
+    this.loadApplications();
+  }
 
-    {
-      name:'Kiran',
-      job:'Python Developer',
-      matchScore:72,
-      technical:70,
-      communication:68,
-      overall:69,
-      status:'Rejected'
-    }
-
-  ];
+  loadApplications(): void {
+    this.applicationService.getAllApplications().subscribe({
+      next: (data) => {
+        this.results = data;
+      },
+      error: (error) => {
+        console.error(error);
+        alert('Failed to load applications.');
+      }
+    });
+  }
 
 }

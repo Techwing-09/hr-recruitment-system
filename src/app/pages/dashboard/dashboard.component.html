@@ -8,22 +8,22 @@
 
         <div class="card">
             <h2>Total Jobs</h2>
-            <h3>15</h3>
+            <h3>{{ dashboard.totalJobs }}</h3>
         </div>
 
         <div class="card">
             <h2>Total Candidates</h2>
-            <h3>120</h3>
+            <h3>{{ dashboard.totalCandidates }}</h3>
         </div>
 
         <div class="card">
             <h2>Selected</h2>
-            <h3>35</h3>
+            <h3>{{ dashboard.selectedCandidates }}</h3>
         </div>
 
         <div class="card">
             <h2>Rejected</h2>
-            <h3>85</h3>
+            <h3>{{ dashboard.rejectedCandidates }}</h3>
         </div>
 
     </div>
@@ -35,29 +35,29 @@
         <table>
 
             <thead>
-
                 <tr>
                     <th>Job Title</th>
+                    <th>Company</th>
                     <th>Applications</th>
                 </tr>
-
             </thead>
 
             <tbody>
 
-                <tr>
-                    <td>Java Developer</td>
-                    <td>25</td>
+                <tr *ngFor="let job of recentJobs">
+
+                    <td>{{ job.jobTitle }}</td>
+
+                    <td>{{ job.companyName }}</td>
+
+                    <td>{{ job.applicationCount }}</td>
+
                 </tr>
 
-                <tr>
-                    <td>Python Developer</td>
-                    <td>18</td>
-                </tr>
-
-                <tr>
-                    <td>Angular Developer</td>
-                    <td>15</td>
+                <tr *ngIf="recentJobs.length === 0">
+                    <td colspan="3" style="text-align:center;">
+                        No Job Posts Available
+                    </td>
                 </tr>
 
             </tbody>

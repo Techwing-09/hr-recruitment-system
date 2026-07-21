@@ -1,56 +1,52 @@
-<app-candidate-sidebar></app-candidate-sidebar>
-
 <div class="dashboard-container">
 
-    <h1>Candidate Dashboard</h1>
+    <!-- Sidebar -->
+    <app-candidate-sidebar></app-candidate-sidebar>
 
-    <p class="welcome">
-        Welcome to TalentMatch
-    </p>
+    <!-- Main Content -->
+    <div class="main-content">
 
-    <div class="cards">
+        <h1>Candidate Dashboard</h1>
 
-        <div class="card">
+        
 
-            <h2>Available Jobs</h2>
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
 
-            <h3>15</h3>
+            <!-- Available Jobs -->
+            <div class="card">
+                <h2>Available Jobs</h2>
+                <h1>{{ dashboard.availableJobs }}</h1>
+            </div>
+
+            <!-- Applied Jobs -->
+            <div class="card">
+                <h2>Applied Jobs</h2>
+                <h1>{{ dashboard.appliedJobs }}</h1>
+            </div>
+
+            <!-- Interview Invitations -->
+            <div class="card">
+                <h2>Interview Invitations</h2>
+                <h1>{{ dashboard.interviewInvitations }}</h1>
+            </div>
 
         </div>
 
-        <div class="card">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
 
-            <h2>Applied Jobs</h2>
+            <h2>Quick Actions</h2>
 
-            <h3>2</h3>
+            <button routerLink="/candidate/jobs">
+                View Available Jobs
+            </button>
+
+            <button routerLink="/candidate/applications">
+                My Applications
+            </button>
 
         </div>
-
-        <div class="card">
-
-            <h2>Interview Invitations</h2>
-
-            <h3>1</h3>
-
-        </div>
-
-    </div>
-
-    <div class="quick-actions">
-
-        <h2>Quick Actions</h2>
-
-        <button routerLink="/apply-job">
-
-            View Available Jobs
-
-        </button>
-
-        <button routerLink="/my-applications">
-
-            My Applications
-
-        </button>
 
     </div>
 

@@ -8,20 +8,31 @@
 
         <form>
 
+            <!-- Job Title -->
             <label>Job Title</label>
             <input
                 type="text"
-                [(ngModel)]="job.title"
-                name="title"
+                [(ngModel)]="job.jobTitle"
+                name="jobTitle"
                 placeholder="Enter Job Title">
 
+            <!-- Company Name -->
+            <label>Company Name</label>
+            <input
+                type="text"
+                [(ngModel)]="job.companyName"
+                name="companyName"
+                placeholder="Enter Company Name">
+
+            <!-- Required Skills -->
             <label>Required Skills</label>
             <input
                 type="text"
-                [(ngModel)]="job.skills"
-                name="skills"
+                [(ngModel)]="job.requiredSkills"
+                name="requiredSkills"
                 placeholder="Java, Spring Boot, MySQL">
 
+            <!-- Experience -->
             <label>Experience</label>
             <input
                 type="text"
@@ -29,13 +40,15 @@
                 name="experience"
                 placeholder="2 Years">
 
-            <label>Salary (LPA)</label>
+            <!-- Salary -->
+            <label>Salary</label>
             <input
                 type="text"
                 [(ngModel)]="job.salary"
                 name="salary"
-                placeholder="8 LPA">
+                placeholder="600000">
 
+            <!-- Location -->
             <label>Location</label>
             <input
                 type="text"
@@ -43,12 +56,13 @@
                 name="location"
                 placeholder="Hyderabad">
 
+            <!-- Job Description -->
             <label>Job Description</label>
 
             <textarea
                 rows="5"
-                [(ngModel)]="job.description"
-                name="description"
+                [(ngModel)]="job.jobDescription"
+                name="jobDescription"
                 placeholder="Enter Job Description">
             </textarea>
 

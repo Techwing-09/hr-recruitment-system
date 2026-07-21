@@ -1,0 +1,20 @@
+<div class="resume-container">
+
+    <h2>Upload Resume</h2>
+
+    <input
+        type="file"
+        accept=".pdf"
+        (change)="onFileSelected($event)">
+
+    <br><br>
+
+    <button (click)="uploadResume()">
+        Upload Resume
+    </button>
+
+    <button (click)="viewResume()">
+        View Resume
+    </button>
+
+</div>

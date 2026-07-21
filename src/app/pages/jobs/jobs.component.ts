@@ -1,48 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Job } from 'src/app/models/job';
+import { JobService } from 'src/app/services/job.service';
 
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.css']
 })
-export class JobsComponent {
+export class JobsComponent implements OnInit {
 
-  jobs = [
+  jobs: Job[] = [];
 
-    {
-      title: 'Java Developer',
-      skills: 'Java, Spring Boot',
-      experience: '2 Years',
-      salary: '8 LPA',
-      location: 'Hyderabad',
-      description: 'Develop REST APIs using Spring Boot.'
-    },
+  constructor(
+    private jobService: JobService,
+    private router: Router
+  ) {}
 
-    {
-      title: 'Angular Developer',
-      skills: 'Angular, TypeScript',
-      experience: '1 Year',
-      salary: '6 LPA',
-      location: 'Bangalore',
-      description: 'Develop responsive Angular applications.'
-    }
+  ngOnInit(): void {
+    this.loadJobs();
+  }
 
-  ];
+  // Load all jobs
+  loadJobs(): void {
 
-  editJob(index:number){
+    this.jobService.getAllJobs().subscribe({
 
-    alert("Edit Job : " + this.jobs[index].title);
+      next: (data) => {
 
-    // Later navigate to Add Job page
-    // and load selected job details
+        this.jobs = data;
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+
+        alert("Failed to load jobs.");
+
+      }
+
+    });
 
   }
 
-  deleteJob(index:number){
+  // Edit Job
+  editJob(id: number): void {
 
-    this.jobs.splice(index,1);
+    this.router.navigate(['/add-job', id]);
 
-    alert("Job Deleted Successfully");
+  }
+
+  // Delete Job
+  deleteJob(id: number): void {
+
+    if (confirm("Are you sure you want to delete this job?")) {
+
+      this.jobService.deleteJob(id).subscribe({
+
+      next: (message) => {
+
+  alert(message);
+
+  this.loadJobs();
+
+},
+
+        error: (error) => {
+
+          console.error(error);
+
+          alert("Failed to delete job.");
+
+        }
+
+      });
+
+    }
 
   }
 

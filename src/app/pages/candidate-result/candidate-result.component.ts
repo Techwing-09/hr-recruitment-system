@@ -1,34 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Application } from 'src/app/models/application';
+import { ApplicationService } from 'src/app/services/application.service';
 
 @Component({
   selector: 'app-candidate-result',
   templateUrl: './candidate-result.component.html',
   styleUrls: ['./candidate-result.component.css']
 })
-export class CandidateResultComponent {
+export class CandidateResultComponent implements OnInit {
 
-  candidate = {
+  application!: Application;
 
-    name: 'Rahul Kumar',
+  constructor(
+    private route: ActivatedRoute,
+    private applicationService: ApplicationService
+  ) {}
 
-    email: 'rahul@gmail.com',
+  ngOnInit(): void {
 
-    phone: '9876543210',
+    const applicationId = Number(
+      this.route.snapshot.paramMap.get('applicationId')
+    );
 
-    job: 'Java Developer',
+    this.applicationService.getApplicationById(applicationId)
+      .subscribe({
 
-    matchScore: 92,
+        next: (data) => {
 
-    technical: 90,
+          this.application = data;
 
-    communication: 88,
+        },
 
-    overall: 89,
+        error: (error) => {
 
-    feedback: 'Candidate demonstrated strong Java and Spring Boot knowledge with good communication skills. Recommended for selection.',
+          console.error(error);
+          alert("Unable to load candidate details.");
 
-    status: 'Selected'
+        }
 
-  };
+      });
+
+  }
+
+  sendOffer(): void {
+
+    this.applicationService
+      .sendOffer(this.application.applicationId!)
+      .subscribe({
+
+        next: (message) => {
+
+          alert(message);
+
+          this.application.finalStatus = "Offer Sent";
+
+        }
+
+      });
+
+  }
+
+  rejectCandidate(): void {
+
+    this.applicationService
+      .rejectCandidate(this.application.applicationId!)
+      .subscribe({
+
+        next: (message) => {
+
+          alert(message);
+
+          this.application.finalStatus = "Rejected";
+
+        }
+
+      });
+
+  }
+
+  viewResume(): void {
+
+    window.open(
+      `http://localhost:8080/api/resumes/view/${this.application.candidateId}`,
+      '_blank'
+    );
+
+  }
 
 }

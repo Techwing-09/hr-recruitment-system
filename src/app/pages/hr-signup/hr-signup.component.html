@@ -6,37 +6,48 @@
 
         <p>Create your HR account</p>
 
-        <form>
+        <form (ngSubmit)="register()">
 
             <label>Full Name</label>
             <input
-            type="text"
-            placeholder="Enter Full Name">
+                type="text"
+                name="fullName"
+                [(ngModel)]="user.fullName"
+                placeholder="Enter Full Name">
 
             <label>Company Name</label>
             <input
-            type="text"
-            placeholder="Enter Company Name">
+                type="text"
+                name="companyName"
+                [(ngModel)]="user.companyName"
+                placeholder="Enter Company Name">
 
             <label>Email</label>
             <input
-            type="email"
-            placeholder="Enter Email">
+                type="email"
+                name="email"
+                [(ngModel)]="user.email"
+                placeholder="Enter Email">
 
             <label>Phone Number</label>
             <input
-            type="text"
-            placeholder="Enter Phone Number">
+                type="text"
+                name="phone"
+                [(ngModel)]="user.phone"
+                placeholder="Enter Phone Number">
 
             <label>Password</label>
             <input
-            type="password"
-            placeholder="Create Password">
+                type="password"
+                name="password"
+                [(ngModel)]="user.password"
+                placeholder="Create Password">
 
             <label>Confirm Password</label>
             <input
-            type="password"
-            placeholder="Confirm Password">
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password">
 
             <button type="submit">
                 Register
@@ -45,13 +56,10 @@
         </form>
 
         <div class="login-link">
-
             Already have an account?
-
             <a routerLink="/hr-login">
                 Login
             </a>
-
         </div>
 
     </div>

@@ -1,26 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  profile = {
+  profile: any = {};
 
-    name: 'John Smith',
+  editMode: boolean = false;
 
-    company: 'TalentMatch Technologies',
+  constructor(private authService: AuthService) { }
 
-    email: 'johnsmith@gmail.com',
+  ngOnInit(): void {
+    this.loadProfile();
+  }
 
-    phone: '+91 9876543210',
+  // Load HR Profile
+  loadProfile(): void {
 
-    role: 'HR Manager',
+    const userId = Number(localStorage.getItem('userId'));
 
-    address: 'Hyderabad, Telangana'
+    console.log("User ID:", userId);
 
-  };
+    this.authService.getUserById(userId).subscribe({
+
+      next: (data: any) => {
+
+        console.log("Profile Data:", data);
+
+        this.profile = data;
+
+      },
+
+      error: (err: any) => {
+
+        console.log(err);
+
+      }
+
+    });
+
+  }
+
+  // Enable Edit Mode
+  editProfile(): void {
+
+    this.editMode = true;
+
+  }
+
+  // Save Updated Profile
+  saveProfile(): void {
+
+    const userId = Number(localStorage.getItem('userId'));
+
+    this.authService.updateUser(userId, this.profile).subscribe({
+
+      next: (data: any) => {
+
+        alert("Profile Updated Successfully");
+
+        this.profile = data;
+
+        this.editMode = false;
+
+      },
+
+      error: (err: any) => {
+
+        console.log(err);
+
+        alert("Failed to Update Profile");
+
+      }
+
+    });
+
+  }
 
 }

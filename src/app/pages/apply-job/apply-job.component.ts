@@ -1,53 +1,146 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ResumeService } from 'src/app/services/resume.service';
+import { JobService } from 'src/app/services/job.service';
+import { ApplicationService } from 'src/app/services/application.service';
+
+import { Job } from 'src/app/models/job';
+import { Application } from 'src/app/models/application';
 
 @Component({
   selector: 'app-apply-job',
   templateUrl: './apply-job.component.html',
   styleUrls: ['./apply-job.component.css']
 })
-export class ApplyJobComponent {
+export class ApplyJobComponent implements OnInit {
 
+  candidateId!: number;
   selectedFile: File | null = null;
 
-  jobs = [
+  jobs: Job[] = [];
 
-    {
-      title:'Java Developer',
-      skills:'Java, Spring Boot',
-      experience:'2 Years',
-      salary:'8 LPA',
-      location:'Hyderabad',
-      description:'Develop enterprise applications using Spring Boot.'
-    },
+  constructor(
+    private resumeService: ResumeService,
+    private jobService: JobService,
+    private applicationService: ApplicationService
+  ) { }
 
-    {
-      title:'Angular Developer',
-      skills:'Angular, TypeScript',
-      experience:'1 Year',
-      salary:'6 LPA',
-      location:'Bangalore',
-      description:'Develop responsive web applications.'
-    }
+  ngOnInit(): void {
 
-  ];
+    const id = localStorage.getItem('candidateId');
 
-  onFileSelected(event:any){
+    if (id) {
 
-    this.selectedFile = event.target.files[0];
+      this.candidateId = Number(id);
 
-  }
+    } else {
 
-  applyJob(job:any){
-
-    if(!this.selectedFile){
-
-      alert("Please upload your resume.");
-
+      alert("Please login first.");
       return;
 
     }
 
-    alert("Application submitted successfully for " + job.title);
+    this.getAllJobs();
+
+  }
+
+  // Load all jobs
+  getAllJobs(): void {
+
+    this.jobService.getAllJobs().subscribe({
+
+      next: (data: Job[]) => {
+
+        this.jobs = data;
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+        alert("Unable to load jobs.");
+
+      }
+
+    });
+
+  }
+
+  // Select Resume
+  onFileSelected(event: any): void {
+
+    if (event.target.files.length > 0) {
+
+      this.selectedFile = event.target.files[0];
+
+    }
+
+  }
+
+  // Apply Job
+  applyJob(job: Job): void {
+
+    if (!this.selectedFile) {
+
+      alert("Please upload your resume.");
+      return;
+
+    }
+
+    // Upload Resume
+    this.resumeService.uploadResume(this.candidateId, this.selectedFile)
+      .subscribe({
+
+        next: () => {
+
+          const application: Application = {
+
+            candidateId: this.candidateId,
+            jobId: job.id!
+
+          };
+
+          // Save Application
+          this.applicationService.applyJob(application)
+            .subscribe({
+
+              next: (message: string) => {
+
+                alert("Resume Uploaded Successfully");
+                alert(message);
+
+                this.selectedFile = null;
+
+              },
+
+              error: (error) => {
+
+                console.error(error);
+
+                if (error.error) {
+                  alert(error.error);
+                } else {
+                  alert("Application failed.");
+                }
+
+              }
+
+            });
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+          if (error.error) {
+            alert(error.error);
+          } else {
+            alert("Resume Upload Failed");
+          }
+
+        }
+
+      });
 
   }
 

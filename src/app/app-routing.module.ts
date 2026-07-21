@@ -19,7 +19,7 @@ import { CandidateSignupComponent } from './pages/candidate-signup/candidate-sig
 import { CandidateDashboardComponent } from './pages/candidate-dashboard/candidate-dashboard.component';
 import { ApplyJobComponent } from './pages/apply-job/apply-job.component';
 import { MyApplicationsComponent } from './pages/my-applications/my-applications.component';
-
+import { ResumeComponent } from './pages/resume/resume.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -34,9 +34,10 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'jobs', component: JobsComponent },
   { path: 'add-job', component: AddJobComponent },
+  { path: 'add-job/:id', component: AddJobComponent },
   { path: 'candidates', component: CandidatesComponent },
   { path: 'results', component: ResultsComponent },
-  { path: 'candidate-result', component: CandidateResultComponent },
+  { path: 'candidate-result/:applicationId', component: CandidateResultComponent },
   { path: 'profile', component: ProfileComponent },
 
   // Candidate
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'apply-job', component: ApplyJobComponent },
   { path: 'my-applications', component: MyApplicationsComponent },
   { path: 'candidate-profile', component: CandidateProfileComponent },
+  {path:'resume',component:ResumeComponent},
 
   // 404
   { path: '**', component: PageNotFoundComponent }

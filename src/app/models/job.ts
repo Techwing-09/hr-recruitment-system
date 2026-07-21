@@ -1,19 +1,25 @@
 export class Job {
 
-    id?: number;
+  id?: number;
 
-    title!: string;
+  jobTitle!: string;
 
-    skills!: string;
+  companyName!: string;
 
-    experience!: string;
+  requiredSkills!: string;
 
-    salary!: string;
+  experience!: string;
 
-    location!: string;
+  salary!: string;
 
-    description!: string;
+  location!: string;
 
-    postedDate!: string;
+  jobDescription!: string;
+
+  createdAt?: string;
+
+  updatedAt?: string;
+
+  message?: string;
 
 }

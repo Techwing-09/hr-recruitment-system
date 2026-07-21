@@ -3,30 +3,32 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
-export class ApplicationService {
+export class AuthService {
 
-  private apiUrl='http://localhost:8080/api/applications';
+  private apiUrl = 'http://localhost:8080/api/user';
 
-  constructor(private http:HttpClient){}
+  constructor(private http: HttpClient) { }
 
-  applyJob(data:any):Observable<any>{
-
-    return this.http.post(this.apiUrl,data);
-
+  // HR Signup
+  signup(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signup`, user);
   }
 
-  getApplications():Observable<any>{
-
-    return this.http.get(this.apiUrl);
-
+  // HR Login
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  getMyApplications(id:number):Observable<any>{
+  // Get HR Profile
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
 
-    return this.http.get(`${this.apiUrl}/candidate/${id}`);
-
+  // Update HR Profile
+  updateUser(id: number, user: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, user);
   }
 
 }

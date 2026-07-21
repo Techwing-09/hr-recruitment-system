@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CandidateService } from 'src/app/services/candidate.service';
 
 @Component({
   selector: 'app-candidate-signup',
@@ -10,7 +11,7 @@ export class CandidateSignupComponent {
 
   candidate = {
 
-    name: '',
+    candidateName: '',
     email: '',
     phone: '',
     password: '',
@@ -18,33 +19,55 @@ export class CandidateSignupComponent {
 
   };
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private candidateService: CandidateService
+  ) {}
 
-  register(){
+  register() {
 
-    if(
-      this.candidate.name=='' ||
-      this.candidate.email=='' ||
-      this.candidate.phone=='' ||
-      this.candidate.password=='' ||
-      this.candidate.confirmPassword==''
-    ){
-
+    if (
+      this.candidate.candidateName == '' ||
+      this.candidate.email == '' ||
+      this.candidate.phone == '' ||
+      this.candidate.password == '' ||
+      this.candidate.confirmPassword == ''
+    ) {
       alert("Please fill all fields");
       return;
-
     }
 
-    if(this.candidate.password!=this.candidate.confirmPassword){
-
+    if (this.candidate.password != this.candidate.confirmPassword) {
       alert("Passwords do not match");
       return;
-
     }
 
-    alert("Registration Successful");
+    const request = {
+      candidateName: this.candidate.candidateName,
+      email: this.candidate.email,
+      phone: this.candidate.phone,
+      password: this.candidate.password
+    };
 
-    this.router.navigate(['/candidate-login']);
+    this.candidateService.signup(request).subscribe({
+
+      next: (response) => {
+
+        alert(response.message);
+
+        this.router.navigate(['/candidate-login']);
+
+      },
+
+      error: (error) => {
+
+        console.error(error);
+
+        alert("Registration Failed");
+
+      }
+
+    });
 
   }
 

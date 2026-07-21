@@ -1,28 +1,89 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CandidateService } from 'src/app/services/candidate.service';
 
 @Component({
   selector: 'app-candidate-profile',
   templateUrl: './candidate-profile.component.html',
   styleUrls: ['./candidate-profile.component.css']
 })
-export class CandidateProfileComponent {
+export class CandidateProfileComponent implements OnInit {
 
-  candidate = {
+  candidateId!: number;
 
-    name: 'Rahul Kumar',
+  isEditMode = false;
 
-    email: 'rahul@gmail.com',
+  candidate: any = {};
 
-    phone: '9876543210',
+  constructor(private candidateService: CandidateService) { }
 
-    qualification: 'B.Tech - Computer Science',
+  ngOnInit(): void {
 
-    skills: 'Java, Spring Boot, Angular',
+    const id = localStorage.getItem('candidateId');
 
-    experience: 'Fresher',
+    if (id) {
 
-    address: 'Hyderabad, Telangana'
+      this.candidateId = Number(id);
 
-  };
+      this.loadCandidate();
+
+    } else {
+
+      alert("Please login first.");
+
+    }
+
+  }
+
+  loadCandidate(): void {
+
+    this.candidateService.getCandidate(this.candidateId).subscribe({
+
+      next: (response: any) => {
+
+        this.candidate = response;
+
+      },
+
+      error: (error: any) => {
+
+        console.error(error);
+
+      }
+
+    });
+
+  }
+
+  editProfile(): void {
+
+    this.isEditMode = true;
+
+  }
+
+  updateProfile(): void {
+
+    this.candidateService.updateCandidate(this.candidateId, this.candidate).subscribe({
+
+      next: (response: any) => {
+
+        alert("Profile Updated Successfully");
+
+        this.isEditMode = false;
+
+        this.loadCandidate();
+
+      },
+
+      error: (error: any) => {
+
+        console.error(error);
+
+        alert("Profile Update Failed");
+
+      }
+
+    });
+
+  }
 
 }

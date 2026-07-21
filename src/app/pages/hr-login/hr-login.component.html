@@ -6,17 +6,21 @@
 
         <p>Login to manage recruitment activities.</p>
 
-        <form>
+        <form (ngSubmit)="login()">
 
             <label>Email</label>
             <input
-            type="email"
-            placeholder="Enter Email">
+                type="email"
+                name="email"
+                [(ngModel)]="user.email"
+                placeholder="Enter Email">
 
             <label>Password</label>
             <input
-            type="password"
-            placeholder="Enter Password">
+                type="password"
+                name="password"
+                [(ngModel)]="user.password"
+                placeholder="Enter Password">
 
             <button type="submit">
                 Login

@@ -1,4 +1,5 @@
 <app-hr-sidebar></app-hr-sidebar>
+
 <div class="job-container">
 
     <div class="header">
@@ -6,8 +7,8 @@
         <h1>Job Management</h1>
 
         <button
-        class="add-btn"
-        routerLink="/add-job">
+            class="add-btn"
+            routerLink="/add-job">
 
             + Post New Job
 
@@ -22,11 +23,12 @@
             <tr>
 
                 <th>Job Title</th>
-                <th>Skills</th>
+                <th>Company Name</th>
+                <th>Required Skills</th>
                 <th>Experience</th>
                 <th>Salary</th>
                 <th>Location</th>
-                <th>Description</th>
+                <th>Job Description</th>
                 <th>Actions</th>
 
             </tr>
@@ -35,33 +37,35 @@
 
         <tbody>
 
-            <tr *ngFor="let job of jobs; let i=index">
+            <tr *ngFor="let job of jobs">
 
-                <td>{{job.title}}</td>
+                <td>{{ job.jobTitle }}</td>
 
-                <td>{{job.skills}}</td>
+                <td>{{ job.companyName }}</td>
 
-                <td>{{job.experience}}</td>
+                <td>{{ job.requiredSkills }}</td>
 
-                <td>{{job.salary}}</td>
+                <td>{{ job.experience }}</td>
 
-                <td>{{job.location}}</td>
+                <td>{{ job.salary }}</td>
 
-                <td>{{job.description}}</td>
+                <td>{{ job.location }}</td>
+
+                <td>{{ job.jobDescription }}</td>
 
                 <td>
 
                     <button
-                    class="edit-btn"
-                    (click)="editJob(i)">
+                        class="edit-btn"
+                        (click)="editJob(job.id!)">
 
                         Edit
 
                     </button>
 
                     <button
-                    class="delete-btn"
-                    (click)="deleteJob(i)">
+                        class="delete-btn"
+                        (click)="deleteJob(job.id!)">
 
                         Delete
 

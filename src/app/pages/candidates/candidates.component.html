@@ -9,14 +9,12 @@
         <thead>
 
             <tr>
-
                 <th>Candidate Name</th>
                 <th>Email</th>
                 <th>Applied Job</th>
                 <th>Resume</th>
                 <th>Match Score</th>
-                <th>Status</th>
-
+                <th>Interview Status</th>
             </tr>
 
         </thead>
@@ -25,19 +23,31 @@
 
             <tr *ngFor="let candidate of candidates">
 
-                <td>{{candidate.name}}</td>
-                <td>{{candidate.email}}</td>
-                <td>{{candidate.job}}</td>
+                <td>{{ candidate.candidateName }}</td>
+
+                <td>{{ candidate.email }}</td>
+
+                <td>{{ candidate.jobTitle }}</td>
 
                 <td>
-                    <button class="resume-btn">
+                    <button
+                        class="resume-btn"
+                        (click)="viewResume(candidate.candidateId)">
                         View Resume
                     </button>
                 </td>
 
-                <td>{{candidate.matchScore}}%</td>
+                <td>{{ candidate.matchScore }}%</td>
 
-                <td>{{candidate.status}}</td>
+                <td>{{ candidate.interviewStatus }}</td>
+
+            </tr>
+
+            <tr *ngIf="candidates.length == 0">
+
+                <td colspan="6" style="text-align:center;">
+                    No Candidates Found
+                </td>
 
             </tr>
 

@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { HrSidebarComponent } from './components/hr-sidebar/hr-sidebar.component';
 import { CandidateSidebarComponent } from './components/candidate-sidebar/candidate-sidebar.component';
 import { CandidateProfileComponent } from './pages/candidate-profile/candidate-profile.component';
+import { ResumeComponent } from './pages/resume/resume.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CandidateProfileComponent } from './pages/candidate-profile/candidate-p
     PageNotFoundComponent,
     HrSidebarComponent,
     CandidateSidebarComponent,
-    CandidateProfileComponent
+    CandidateProfileComponent,
+    ResumeComponent
     
   ],
   imports: [

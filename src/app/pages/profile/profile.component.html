@@ -7,55 +7,76 @@
         <h2>HR Profile</h2>
 
         <div class="profile-image">
-
             <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                  alt="Profile">
-
         </div>
 
         <div class="profile-details">
 
             <div class="row">
                 <label>Full Name</label>
-                <span>{{profile.name}}</span>
+
+                <input
+                    type="text"
+                    [(ngModel)]="profile.fullName"
+                    [readonly]="!editMode">
             </div>
 
             <div class="row">
                 <label>Company</label>
-                <span>{{profile.company}}</span>
+
+                <input
+                    type="text"
+                    [(ngModel)]="profile.companyName"
+                    [readonly]="!editMode">
             </div>
 
             <div class="row">
                 <label>Email</label>
-                <span>{{profile.email}}</span>
+
+                <input
+                    type="email"
+                    [(ngModel)]="profile.email"
+                    [readonly]="!editMode">
             </div>
 
             <div class="row">
                 <label>Phone</label>
-                <span>{{profile.phone}}</span>
+
+                <input
+                    type="text"
+                    [(ngModel)]="profile.phone"
+                    [readonly]="!editMode">
             </div>
 
             <div class="row">
                 <label>Role</label>
-                <span>{{profile.role}}</span>
-            </div>
 
-            <div class="row">
-                <label>Address</label>
-                <span>{{profile.address}}</span>
+                <input
+                    type="text"
+                    [(ngModel)]="profile.role"
+                    readonly>
             </div>
 
         </div>
 
         <div class="buttons">
 
-            <button class="edit-btn">
+            <button
+                class="edit-btn"
+                *ngIf="!editMode"
+                (click)="editProfile()">
                 Edit Profile
             </button>
 
-            <button class="password-btn">
-                Change Password
+            <button
+                class="edit-btn"
+                *ngIf="editMode"
+                (click)="saveProfile()">
+                Save
             </button>
+
+          
 
         </div>
 

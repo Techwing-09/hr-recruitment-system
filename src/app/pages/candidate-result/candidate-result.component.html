@@ -1,6 +1,6 @@
 <app-hr-sidebar></app-hr-sidebar>
 
-<div class="result-container">
+<div class="result-container" *ngIf="application">
 
     <div class="result-card">
 
@@ -10,61 +10,74 @@
 
         <div class="row">
             <label>Candidate Name</label>
-            <span>{{candidate.name}}</span>
+            <span>{{ application.candidateName }}</span>
         </div>
 
         <div class="row">
             <label>Email</label>
-            <span>{{candidate.email}}</span>
-        </div>
-
-        <div class="row">
-            <label>Phone Number</label>
-            <span>{{candidate.phone}}</span>
+            <span>{{ application.email }}</span>
         </div>
 
         <div class="row">
             <label>Applied Job</label>
-            <span>{{candidate.job}}</span>
+            <span>{{ application.jobTitle }}</span>
+        </div>
+
+        <div class="row">
+            <label>Applied Date</label>
+            <span>{{ application.appliedDate }}</span>
         </div>
 
         <div class="row">
             <label>Resume</label>
-            <button class="resume-btn">View Resume</button>
+
+            <button
+                class="resume-btn"
+                (click)="viewResume()">
+
+                View Resume
+
+            </button>
+
         </div>
 
         <div class="row">
             <label>Match Score</label>
-            <span>{{candidate.matchScore}}%</span>
+            <span>{{ application.matchScore }}%</span>
         </div>
 
         <div class="row">
             <label>Technical Score</label>
-            <span>{{candidate.technical}}</span>
+            <span>{{ application.technicalScore }}</span>
         </div>
 
         <div class="row">
             <label>Communication Score</label>
-            <span>{{candidate.communication}}</span>
+            <span>{{ application.communicationScore }}</span>
         </div>
 
         <div class="row">
             <label>Overall Score</label>
-            <span>{{candidate.overall}}</span>
+            <span>{{ application.overallScore }}</span>
         </div>
 
         <div class="row">
             <label>AI Feedback</label>
-            <span>{{candidate.feedback}}</span>
+            <span>{{ application.aiFeedback }}</span>
         </div>
 
         <div class="row">
-            <label>Status</label>
+            <label>Interview Status</label>
+            <span>{{ application.interviewStatus }}</span>
+        </div>
+
+        <div class="row">
+            <label>Final Status</label>
 
             <span
-            [ngClass]="candidate.status=='Selected' ? 'selected' : 'rejected'">
+                [ngClass]="application.finalStatus == 'Offer Sent' ? 'selected' : 'rejected'">
 
-                {{candidate.status}}
+                {{ application.finalStatus }}
 
             </span>
 
@@ -72,12 +85,20 @@
 
         <div class="buttons">
 
-            <button class="offer-btn">
+            <button
+                class="offer-btn"
+                (click)="sendOffer()">
+
                 Send Offer Letter
+
             </button>
 
-            <button class="reject-btn">
+            <button
+                class="reject-btn"
+                (click)="rejectCandidate()">
+
                 Reject Candidate
+
             </button>
 
         </div>
