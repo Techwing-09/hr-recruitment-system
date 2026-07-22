@@ -34,13 +34,10 @@ export class CandidateLoginComponent {
 
         if (response.message === "Login Successful") {
 
-          // Save candidate details
           localStorage.setItem("candidateId", String(response.id));
           localStorage.setItem("candidateName", response.candidateName);
           localStorage.setItem("candidateEmail", response.email);
           localStorage.setItem("candidatePhone", response.phone);
-
-          console.log("Stored Candidate ID :", localStorage.getItem("candidateId"));
 
           alert("Login Successful");
 
@@ -63,6 +60,13 @@ export class CandidateLoginComponent {
 
     });
 
+  }
+
+  // Forgot Password
+  forgotPassword() {
+    this.router.navigate(['/forgot-password'], {
+      queryParams: { userType: 'candidate' }
+    });
   }
 
 }

@@ -27,7 +27,6 @@ export class HrLoginComponent {
 
         console.log("Login Response:", response);
 
-        // Store logged-in HR details
         localStorage.setItem('userId', response.userId.toString());
         localStorage.setItem('fullName', response.fullName);
         localStorage.setItem('role', response.role);
@@ -41,13 +40,19 @@ export class HrLoginComponent {
       error: (error: any) => {
 
         console.log(error);
-
         alert('Invalid Email or Password');
 
       }
 
     });
 
+  }
+
+  // Forgot Password
+  forgotPassword() {
+    this.router.navigate(['/forgot-password'], {
+      queryParams: { userType: 'hr' }
+    });
   }
 
 }

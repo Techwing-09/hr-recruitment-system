@@ -26,7 +26,7 @@ import { HrSidebarComponent } from './components/hr-sidebar/hr-sidebar.component
 import { CandidateSidebarComponent } from './components/candidate-sidebar/candidate-sidebar.component';
 import { CandidateProfileComponent } from './pages/candidate-profile/candidate-profile.component';
 import { ResumeComponent } from './pages/resume/resume.component';
-
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +51,8 @@ import { ResumeComponent } from './pages/resume/resume.component';
     HrSidebarComponent,
     CandidateSidebarComponent,
     CandidateProfileComponent,
-    ResumeComponent
+    ResumeComponent,
+    ForgotPasswordComponent
     
   ],
   imports: [

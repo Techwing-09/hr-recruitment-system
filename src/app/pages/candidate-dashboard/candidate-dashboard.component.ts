@@ -14,8 +14,18 @@ export class CandidateDashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Replace 1 with the logged-in candidate ID later
-    this.loadDashboard(1);
+    // Get logged-in candidate ID from localStorage
+    const candidateId = Number(localStorage.getItem("candidateId"));
+
+    if (candidateId) {
+
+      this.loadDashboard(candidateId);
+
+    } else {
+
+      console.error("Candidate ID not found in localStorage.");
+
+    }
 
   }
 
@@ -25,14 +35,15 @@ export class CandidateDashboardComponent implements OnInit {
 
       next: (data) => {
 
-        console.log(data);
+        console.log("Dashboard Data:", data);
+
         this.dashboard = data;
 
       },
 
       error: (error) => {
 
-        console.error(error);
+        console.error("Dashboard Error:", error);
 
       }
 

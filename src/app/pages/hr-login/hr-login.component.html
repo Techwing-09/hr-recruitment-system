@@ -9,6 +9,7 @@
         <form (ngSubmit)="login()">
 
             <label>Email</label>
+
             <input
                 type="email"
                 name="email"
@@ -16,6 +17,7 @@
                 placeholder="Enter Email">
 
             <label>Password</label>
+
             <input
                 type="password"
                 name="password"
@@ -34,8 +36,8 @@
                 Create New Account
             </a>
 
-            <a href="#">
-                Forgot Password?
+            <a (click)="forgotPassword()">
+         Forgot Password?
             </a>
 
         </div>

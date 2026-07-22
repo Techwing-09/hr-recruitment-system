@@ -13,8 +13,7 @@ import { ResultsComponent } from './pages/results/results.component';
 import { CandidateResultComponent } from './pages/candidate-result/candidate-result.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CandidateProfileComponent } from './pages/candidate-profile/candidate-profile.component';
-
-import { CandidateLoginComponent } from './pages/candidate-login/candidate-login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';import { CandidateLoginComponent } from './pages/candidate-login/candidate-login.component';
 import { CandidateSignupComponent } from './pages/candidate-signup/candidate-signup.component';
 import { CandidateDashboardComponent } from './pages/candidate-dashboard/candidate-dashboard.component';
 import { ApplyJobComponent } from './pages/apply-job/apply-job.component';
@@ -27,7 +26,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   { path: 'home', component: HomeComponent },
-
+  { path: 'forgot-password',component: ForgotPasswordComponent},
   // HR
   { path: 'hr-login', component: HrLoginComponent },
   { path: 'hr-signup', component: HrSignupComponent },
