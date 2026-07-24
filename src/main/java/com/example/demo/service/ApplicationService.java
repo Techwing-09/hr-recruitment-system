@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.ai.AIService;
 import com.example.demo.dto.ApplicationRequest;
 import com.example.demo.dto.ApplicationResponse;
 import com.example.demo.models.Application;
@@ -32,6 +33,9 @@ public class ApplicationService {
 
     @Autowired
     private ResumeRepository resumeRepository;
+
+    @Autowired
+    private AIService aiService;
 
     // Apply Job
     public String applyJob(ApplicationRequest request) {
@@ -59,21 +63,24 @@ public class ApplicationService {
         application.setResume(resume);
         application.setAppliedDate(LocalDate.now());
 
-     // Temporary values until AI is integrated
-     application.setMatchScore(0.0);
-     application.setTechnicalScore(0.0);
-     application.setCommunicationScore(0.0);
-     application.setOverallScore(0.0);
-     application.setAiFeedback("Interview not completed yet.");
+        // Default Interview Scores
+        application.setTechnicalScore(0.0);
+        application.setCommunicationScore(0.0);
+        application.setOverallScore(0.0);
 
-     application.setInterviewStatus("Applied");
-     application.setFinalStatus("Pending");
+        // Save application first
+        applicationRepository.save(application);
+
+        // Call Python GenAI Match API
+        aiService.generateMatchScore(application, resume, job);
+
+        // Save updated AI values
         applicationRepository.save(application);
 
         return "Application Submitted Successfully";
     }
 
- // Get All Applications
+    // Get All Applications
     public List<ApplicationResponse> getAllApplications() {
 
         List<Application> applications = applicationRepository.findAll();
@@ -81,17 +88,6 @@ public class ApplicationService {
         List<ApplicationResponse> response = new ArrayList<>();
 
         for (Application application : applications) {
-
-            System.out.println("================================");
-            System.out.println("Application ID : " + application.getApplicationId());
-            System.out.println("Candidate Object : " + application.getCandidate());
-
-            if (application.getCandidate() != null) {
-                System.out.println("Candidate ID from Entity : " + application.getCandidate().getId());
-                System.out.println("Candidate Name : " + application.getCandidate().getCandidateName());
-            } else {
-                System.out.println("Candidate Object is NULL");
-            }
 
             ApplicationResponse dto = new ApplicationResponse();
 
@@ -110,14 +106,12 @@ public class ApplicationService {
             dto.setInterviewStatus(application.getInterviewStatus());
             dto.setFinalStatus(application.getFinalStatus());
 
-            System.out.println("DTO Candidate ID : " + dto.getCandidateId());
-            System.out.println("================================");
-
             response.add(dto);
         }
 
         return response;
     }
+
     // Get Application By Id
     public ApplicationResponse getApplicationById(Long applicationId) {
 
@@ -129,7 +123,6 @@ public class ApplicationService {
         dto.setApplicationId(application.getApplicationId());
         dto.setCandidateId(application.getCandidate().getId());
         dto.setJobId(application.getJob().getId());
-
         dto.setCandidateName(application.getCandidate().getCandidateName());
         dto.setEmail(application.getCandidate().getEmail());
         dto.setJobTitle(application.getJob().getJobTitle());
@@ -139,7 +132,6 @@ public class ApplicationService {
         dto.setCommunicationScore(application.getCommunicationScore());
         dto.setOverallScore(application.getOverallScore());
         dto.setAiFeedback(application.getAiFeedback());
-
         dto.setInterviewStatus(application.getInterviewStatus());
         dto.setFinalStatus(application.getFinalStatus());
 
@@ -169,7 +161,6 @@ public class ApplicationService {
             dto.setCommunicationScore(application.getCommunicationScore());
             dto.setOverallScore(application.getOverallScore());
             dto.setAiFeedback(application.getAiFeedback());
-
             dto.setInterviewStatus(application.getInterviewStatus());
             dto.setFinalStatus(application.getFinalStatus());
 
@@ -193,7 +184,6 @@ public class ApplicationService {
             dto.setApplicationId(application.getApplicationId());
             dto.setCandidateId(application.getCandidate().getId());
             dto.setJobId(application.getJob().getId());
-
             dto.setCandidateName(application.getCandidate().getCandidateName());
             dto.setEmail(application.getCandidate().getEmail());
             dto.setJobTitle(application.getJob().getJobTitle());
@@ -203,15 +193,16 @@ public class ApplicationService {
             dto.setCommunicationScore(application.getCommunicationScore());
             dto.setOverallScore(application.getOverallScore());
             dto.setAiFeedback(application.getAiFeedback());
-
             dto.setInterviewStatus(application.getInterviewStatus());
             dto.setFinalStatus(application.getFinalStatus());
+
             response.add(dto);
         }
 
         return response;
     }
- // Send Offer
+
+    // Send Offer
     public String sendOffer(Long applicationId) {
 
         Application application = applicationRepository.findById(applicationId)

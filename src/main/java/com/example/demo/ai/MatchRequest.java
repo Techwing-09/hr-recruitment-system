@@ -1,5 +1,5 @@
 package com.example.demo.ai;
 
-public class OpenAIClient {
+public class MatchRequest {
 
 }
