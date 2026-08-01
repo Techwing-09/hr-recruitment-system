@@ -51,14 +51,16 @@ public class ResumeService {
         Resume resume;
 
         if (existingResume.isPresent()) {
+        	resume = existingResume.get();
+        	File oldFile = new File(resume.getFilePath());
 
-            resume = existingResume.get();
+        	if (oldFile.exists()) {
+        	    boolean deleted = oldFile.delete();
 
-            File oldFile = new File(resume.getFilePath());
-
-            if (oldFile.exists()) {
-                oldFile.delete();
-            }
+        	    if (!deleted) {
+        	        System.out.println("Failed to delete old resume: " + oldFile.getAbsolutePath());
+        	    }
+        	}
 
         } else {
 
@@ -104,7 +106,12 @@ public class ResumeService {
         File file = new File(resume.getFilePath());
 
         if (file.exists()) {
-            file.delete();
+
+            boolean deleted = file.delete();
+
+            if (!deleted) {
+                System.out.println("Failed to delete resume file: " + file.getAbsolutePath());
+            }
         }
 
         resumeRepository.delete(resume);

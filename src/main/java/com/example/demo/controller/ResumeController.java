@@ -14,7 +14,7 @@ import com.example.demo.service.ResumeService;
 
 @RestController
 @RequestMapping("/api/resumes")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ResumeController {
 
     private final ResumeService resumeService;
@@ -24,13 +24,12 @@ public class ResumeController {
     }
 
     // Upload Resume
-    @PostMapping("/upload")
+    @PostMapping("/upload/{candidateId}")
     public ResponseEntity<Resume> uploadResume(
-            @RequestParam("candidateId") Long candidateId,
+            @PathVariable Long candidateId,
             @RequestParam("file") MultipartFile file) throws IOException {
 
         Resume resume = resumeService.uploadResume(candidateId, file);
-
         return ResponseEntity.ok(resume);
     }
 
@@ -43,17 +42,18 @@ public class ResumeController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
 
     // Delete Resume
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteResume(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteResume(
+            @PathVariable Long id) {
 
         resumeService.deleteResume(id);
 
         return ResponseEntity.ok("Resume deleted successfully.");
     }
-
 }
